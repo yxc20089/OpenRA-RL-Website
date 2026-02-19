@@ -11,8 +11,8 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://yxc20089.github.io',
-  baseUrl: '/OpenRA-RL-Website/',
+  url: 'https://openra-rl.dev',
+  baseUrl: '/',
 
   organizationName: 'yxc20089',
   projectName: 'OpenRA-RL-Website',

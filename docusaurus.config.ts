@@ -65,7 +65,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://huggingface.co/spaces/openenv/OpenRA-Bench',
+          href: 'https://github.com/yxc20089/OpenRA-Bench',
           label: 'Leaderboard',
           position: 'left',
         },
@@ -101,7 +101,7 @@ const config: Config = {
           items: [
             {
               label: 'OpenRA-Bench (Leaderboard)',
-              href: 'https://huggingface.co/spaces/openenv/OpenRA-Bench',
+              href: 'https://github.com/yxc20089/OpenRA-Bench',
             },
             {
               label: 'OpenEnv Framework',

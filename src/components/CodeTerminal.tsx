@@ -22,7 +22,7 @@ export default function CodeTerminal() {
             to="/docs/getting-started"
             className="btn-soviet font-teko text-2xl px-6 py-2 flex items-center gap-2 text-white no-underline hover:no-underline hover:text-white inline-flex"
           >
-            <Book className="w-5 h-5" /> READ THE DOCS
+            <Book className="w-5 h-5" /> GET STARTED
           </Link>
         </div>
 

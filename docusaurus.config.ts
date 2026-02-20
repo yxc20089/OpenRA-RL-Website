@@ -64,11 +64,8 @@ const config: Config = {
           label: 'Docs',
         },
         {to: '/blog', label: 'Blog', position: 'left'},
-        {
-          href: 'https://github.com/yxc20089/OpenRA-Bench',
-          label: 'Leaderboard',
-          position: 'left',
-        },
+        {to: '/leaderboard', label: 'Leaderboard', position: 'left'},
+        {to: '/research', label: 'R&D Division', position: 'left'},
         {
           href: 'https://github.com/yxc20089/OpenRA-RL',
           label: 'GitHub',

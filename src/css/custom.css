@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Teko:wght@400;600;700&display=swap');
+
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Docusaurus theme variables (kept for docs/blog pages) ===== */
 :root {
   --ifm-color-primary: #c23b22;
   --ifm-color-primary-dark: #af351f;
@@ -21,118 +27,157 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
-/* Hero section */
-.hero--openra {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  color: #fff;
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+/* ===== Red Alert Theme (scoped to custom layout) ===== */
+
+.openra-layout {
+  font-family: 'Share Tech Mono', monospace;
 }
 
-.hero--openra .hero__title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
+.openra-layout h1,
+.openra-layout h2,
+.openra-layout h3,
+.openra-layout h4,
+.openra-layout .font-teko {
+  font-family: 'Teko', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.hero--openra .hero__subtitle {
-  font-size: 1.4rem;
-  opacity: 0.9;
-  max-width: 600px;
-  margin: 0 auto 2rem;
+/* Scanlines overlay */
+.scanlines {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.2)
+  );
+  background-size: 100% 4px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 50;
 }
 
-/* Feature cards */
-.feature-card {
-  background: var(--ifm-card-background-color, #fff);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 8px;
-  padding: 1.5rem;
-  height: 100%;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+/* CRT flicker */
+.crt-flicker {
+  animation: crt 0.15s infinite;
 }
 
-.feature-card:hover {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+@keyframes crt {
+  0% { opacity: 0.98; }
+  50% { opacity: 1; }
+  100% { opacity: 0.99; }
 }
 
-.feature-icon {
-  font-size: 2.5rem;
-  margin-bottom: 0.75rem;
-  display: block;
+/* Terminal / alert text effects */
+.terminal-text {
+  color: #84cc16;
+  text-shadow: 0 0 5px rgba(132, 204, 22, 0.5);
 }
 
-/* Code preview section */
-.code-preview {
-  background: var(--ifm-background-surface-color);
-  padding: 3rem 0;
+.alert-text {
+  color: #ef4444;
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
 }
 
-/* Architecture section */
-.architecture-section {
-  padding: 3rem 0;
+/* Soviet-style primary button */
+.btn-soviet {
+  background: #dc2626;
+  border: 2px solid #f87171;
+  box-shadow: 4px 4px 0 #000;
+  transition: all 0.1s;
 }
 
-.architecture-section img {
-  max-width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+.btn-soviet:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+  background: #ef4444;
 }
 
-/* Stats bar */
-.stats-bar {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  padding: 2rem 0;
-  flex-wrap: wrap;
+.btn-soviet:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 #000;
 }
 
-.stat-item {
-  text-align: center;
+/* Ghost button */
+.btn-ghost {
+  background: #171717;
+  border: 2px solid #525252;
+  color: #a3a3a3;
+  box-shadow: 4px 4px 0 #000;
+  transition: all 0.1s;
 }
 
-.stat-number {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--ifm-color-primary);
-  display: block;
-}
-
-.stat-label {
-  font-size: 0.9rem;
-  opacity: 0.7;
-}
-
-/* Badge styles for leaderboard preview */
-.badge--scripted {
-  background-color: #ffcd75;
-  color: #333;
-}
-
-.badge--llm {
-  background-color: #7497db;
+.btn-ghost:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+  border-color: #737373;
   color: #fff;
 }
 
-.badge--rl {
-  background-color: #75809c;
+/* Military card */
+.card-military {
+  background: #121212;
+  border: 2px solid #262626;
+  border-left: 4px solid #dc2626;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.8);
+  transition: all 0.2s;
+}
+
+.card-military:hover {
+  border-color: #dc2626;
+  transform: translateY(-4px);
+  box-shadow: 6px 10px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* Carbon background */
+.carbon-bg {
+  background: radial-gradient(circle at center, #1a0505 0%, #050505 100%);
+}
+
+/* Military leaderboard table */
+.table-military {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.table-military th {
+  background: #1a0505;
+  color: #ef4444;
+  border-bottom: 2px solid #dc2626;
+  padding: 1.2rem 1rem;
+  text-align: left;
+  font-size: 1.1rem;
+}
+
+.table-military td {
+  border-bottom: 1px solid #262626;
+  padding: 1.2rem 1rem;
+  color: #d1d5db;
+  transition: background 0.2s;
+}
+
+.table-military tr:hover td {
+  background: rgba(220, 38, 38, 0.1);
   color: #fff;
 }
 
-@media screen and (max-width: 996px) {
-  .hero--openra {
-    padding: 2rem 1rem;
-  }
+.table-military tr:last-child td {
+  border-bottom: none;
+}
 
-  .hero--openra .hero__title {
-    font-size: 2.5rem;
-  }
+/* Fade-in animation */
+.animate-fade-in {
+  animation: fadeIn 0.7s ease-in-out;
+}
 
-  .stats-bar {
-    gap: 1.5rem;
-  }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

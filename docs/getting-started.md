@@ -5,39 +5,128 @@ title: Getting Started
 
 # Getting Started
 
-OpenRA-RL is a Gymnasium-style reinforcement learning environment for the [OpenRA](https://www.openra.net/) real-time strategy engine. It lets you train AI agents that build bases, command armies, and play full Red Alert games.
+OpenRA-RL lets you command AI agents to play Red Alert — the classic RTS game. LLMs, scripted bots, or RL agents build bases, train armies, and fight through a clean Python API.
 
-## Prerequisites
+## Quick Start (pip install)
 
-- **Python 3.10+**
-- **Docker** (recommended) or .NET 8.0 SDK + native dependencies
-- **OpenEnv** framework (`pip install openenv-core`)
-
-## Quick Start with Docker
-
-The fastest way to get running:
+The fastest way to get playing:
 
 ```bash
-# 1. Clone the repo
-git clone --recursive https://github.com/yxc20089/OpenRA-RL.git
-cd OpenRA-RL
+pip install openra-rl
+openra-rl play
+```
 
-# 2. Build the Docker image
-cd docker && bash build.sh && cd ..
+On first run, an interactive wizard helps you pick your LLM provider:
 
-# 3. Start the game server
-docker compose up openra-rl
+```
+Welcome to OpenRA-RL!
+Let's set up your LLM provider.
 
-# 4. Install the Python client
-pip install -e .
+Choose provider:
+  [1] OpenRouter (cloud — Claude, GPT, Qwen, Mistral, etc.)
+  [2] Ollama (local, free)
+  [3] LM Studio (local, free)
+```
 
-# 5. Run the scripted bot example
+The CLI pulls the game server Docker image and starts everything automatically.
+
+### Prerequisites
+
+- **Docker** — the game server runs in a container ([install](https://docs.docker.com/get-docker/))
+- **Python 3.10+**
+- An LLM endpoint (cloud API key or local model server)
+
+### Skip the wizard
+
+Pass flags directly to skip interactive setup:
+
+```bash
+# Cloud (OpenRouter)
+openra-rl play --provider openrouter --api-key sk-or-... --model anthropic/claude-sonnet-4-20250514
+
+# Local (Ollama — free, no API key)
+openra-rl play --provider ollama --model qwen3:32b
+
+# Local (LM Studio)
+openra-rl play --provider lmstudio --model <model-name>
+```
+
+### Check your setup
+
+```bash
+openra-rl doctor
+```
+
+This verifies Docker, Python, saved config, and server status.
+
+## CLI Reference
+
+```
+openra-rl play         Run the LLM agent (wizard on first use)
+openra-rl config       Re-run the setup wizard
+openra-rl server       start | stop | status | logs
+openra-rl mcp-server   Start MCP stdio server (for OpenClaw / Claude Desktop)
+openra-rl doctor       Check system prerequisites
+openra-rl version      Print version
+```
+
+## MCP Server (OpenClaw / Claude Desktop)
+
+OpenRA-RL exposes all 48 game tools as a standard MCP server:
+
+```bash
+openra-rl mcp-server
+```
+
+Add to your MCP client config:
+
+```json
+{
+  "mcpServers": {
+    "openra-rl": {
+      "command": "openra-rl",
+      "args": ["mcp-server"]
+    }
+  }
+}
+```
+
+Or install from ClawHub:
+```bash
+clawhub install openra-rl
+```
+
+Then chat: _"Start a game of Red Alert on easy difficulty, build a base, and defeat the enemy."_
+
+## Running the Examples
+
+For more control, run the example agents directly against a running server:
+
+### Scripted Bot
+A hardcoded state-machine bot that demonstrates all action types:
+
+```bash
+openra-rl server start
 python examples/scripted_bot.py --verbose
 ```
 
-## Local Development Setup
+### MCP Bot
+A planning-aware bot that uses knowledge tools to formulate strategy:
 
-If you prefer running without Docker:
+```bash
+python examples/mcp_bot.py --verbose
+```
+
+### LLM Agent
+A Claude/GPT-powered agent that reasons about the game state:
+
+```bash
+python examples/llm_agent.py --config examples/config-ollama.yaml --verbose
+```
+
+## Local Development (without Docker)
+
+If you prefer running the game engine natively:
 
 ### 1. Install Dependencies
 
@@ -82,35 +171,10 @@ async def main():
 asyncio.run(main())
 ```
 
-## Running the Examples
-
-OpenRA-RL includes three example agents with increasing sophistication:
-
-### Scripted Bot
-A hardcoded state-machine bot that demonstrates all action types:
-
-```bash
-python examples/scripted_bot.py --verbose
-```
-
-### MCP Bot
-A planning-aware bot that uses knowledge tools to formulate strategy:
-
-```bash
-python examples/mcp_bot.py
-```
-
-### LLM Agent
-A Claude/GPT-powered agent that reasons about the game state:
-
-```bash
-export OPENROUTER_API_KEY=your-key
-python examples/llm_agent.py
-```
-
 ## Next Steps
 
 - [Architecture](/docs/architecture) — Understand the three-repo design
 - [Observation Space](/docs/observation-space) — What your agent can see
 - [Action Space](/docs/action-space) — What your agent can do
-- [Docker Deployment](/docs/docker) — Production deployment guide
+- [Agent Types](/docs/agents) — Scripted, MCP, and LLM agent architectures
+- [Docker Deployment](/docs/docker) — Server management and deployment

@@ -5,9 +5,18 @@ title: Roadmap
 
 # Roadmap
 
-## Current Version: v0.1.0
+## Current Version: v0.2.0
 
-OpenRA-RL has completed 6 development sprints with 212+ tests passing.
+OpenRA-RL has completed 8 development sprints with 418 tests passing.
+
+### What's New in v0.2.0
+
+- **One-line install**: `pip install openra-rl && openra-rl play`
+- **Interactive CLI** with setup wizard, Docker management, and diagnostics
+- **Pre-built Docker images** on GHCR (no more 20-min builds)
+- **Standard MCP server** (stdio) for OpenClaw and Claude Desktop
+- **Published on [PyPI](https://pypi.org/project/openra-rl/)**, [GHCR](https://ghcr.io/yxc20089/openra-rl), and [ClawHub](https://clawhub.ai/skill/openra-rl)
+- **CI/CD**: GitHub Actions for testing, Docker publish, and PyPI publish
 
 ### Completed Features
 
@@ -26,6 +35,11 @@ OpenRA-RL has completed 6 development sprints with 212+ tests passing.
 | Pre-game planning phase + knowledge tools | Done | 5 |
 | Bulk knowledge tools (faction briefing, map analysis) | Done | 5 |
 | Agent fixes (auto-placement, production validation) | Done | 6 |
+| Unified YAML config + local model support | Done | 7 |
+| CLI entry point (`openra-rl play`) | Done | 8 |
+| MCP stdio server + OpenClaw skill | Done | 8 |
+| Pre-built Docker images on GHCR | Done | 8 |
+| PyPI package + CI/CD workflows | Done | 8 |
 
 ### Supported Game
 
@@ -41,7 +55,7 @@ OpenRA-RL has completed 6 development sprints with 212+ tests passing.
 
 ## Upcoming Milestones
 
-### v0.2 — OpenRA-Bench + Multi-Agent
+### v0.3 — OpenRA-Bench + Multi-Agent
 
 - **OpenRA-Bench**: HuggingFace Space leaderboard for agent evaluation
   - Standardized evaluation protocol (maps, opponents, metrics)
@@ -50,7 +64,7 @@ OpenRA-RL has completed 6 development sprints with 212+ tests passing.
 - **Multi-agent support**: Agent vs Agent matches
 - **Evaluation scripts**: Automated N-game benchmarking with metrics export
 
-### v0.3 — RL Training Pipelines
+### v0.4 — RL Training Pipelines
 
 - **PPO/SAC integration**: Training scripts with TRL and Stable Baselines3
 - **Reward shaping**: Configurable multi-component reward functions

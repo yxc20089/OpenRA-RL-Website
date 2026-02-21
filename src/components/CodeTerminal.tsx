@@ -7,16 +7,15 @@ export default function CodeTerminal() {
     <section className="py-24 bg-[#050505] border-y border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div>
-          <h2 className="font-teko text-5xl text-white mb-6">SIMPLE, DEADLY API</h2>
+          <h2 className="font-teko text-5xl text-white mb-6">ZERO TO PLAYING IN SECONDS</h2>
           <p className="text-lg text-gray-400 mb-6 leading-relaxed">
-            You don&apos;t need to learn a complex game engine to get started. OpenRA-RL
-            abstracts the chaos of war into a standard, clean Python loop.
+            Install from PyPI, run one command, and watch your AI play Red Alert.
+            The CLI handles Docker, configuration, and the game server automatically.
           </p>
           <p className="text-lg text-gray-400 mb-8 leading-relaxed">
-            Connect your script to a running match, let your AI model read the map telemetry,
-            and issue commands to your troops. Whether you are using a{' '}
-            <strong>local open-source model</strong> or a <strong>cloud-based API</strong>,
-            integration takes minutes.
+            Works with <strong>cloud models</strong> (Claude, GPT, Qwen via OpenRouter) or{' '}
+            <strong>local models</strong> (Ollama, LM Studio) — no API key needed for local.
+            Also available as an <strong>MCP server</strong> for OpenClaw and Claude Desktop.
           </p>
           <Link
             to="/docs/getting-started"
@@ -33,46 +32,30 @@ export default function CodeTerminal() {
             <div className="w-3 h-3 rounded-full bg-yellow-500" />
             <div className="w-3 h-3 rounded-full bg-green-500" />
             <span className="ml-2 text-xs text-gray-400 font-mono flex items-center gap-2">
-              <Code className="w-3 h-3" /> red_alert_agent.py
+              <Code className="w-3 h-3" /> terminal
             </span>
           </div>
           <div className="bg-[#0d0d0d] p-6 overflow-x-auto text-sm">
             <pre className="font-mono text-gray-300 leading-relaxed m-0 p-0 bg-transparent border-none">
-              <span className="text-pink-500">from</span> openra_env.client{' '}
-              <span className="text-pink-500">import</span> OpenRAEnv{'\n'}
-              <span className="text-pink-500">from</span> agents{' '}
-              <span className="text-pink-500">import</span> LLMAgent{'\n\n'}
-              <span className="text-blue-400">async def</span>{' '}
-              <span className="text-yellow-200">commence_operation</span>():{'\n'}
-              {'    '}
-              <span className="text-blue-400">async with</span> OpenRAEnv(
-              <span className="text-green-400">"http://localhost:8000"</span>){' '}
-              <span className="text-pink-500">as</span> env:{'\n'}
-              {'        '}
-              <span className="text-gray-500"># Establish connection to the warzone</span>
-              {'\n'}
-              {'        '}obs = <span className="text-blue-400">await</span> env.reset()
-              {'\n\n'}
-              {'        '}
-              <span className="text-gray-500">
-                # Instantiate your Commander (Local Llama or Cloud GPT/Claude)
-              </span>
-              {'\n'}
-              {'        '}commander = LLMAgent(model=
-              <span className="text-green-400">"claude-3-opus"</span>){'\n\n'}
-              {'        '}
-              <span className="text-blue-400">while not</span> obs.done:{'\n'}
-              {'            '}
-              <span className="text-gray-500">
-                # AI evaluates enemy positions and base economy
-              </span>
-              {'\n'}
-              {'            '}tactical_decision = commander.evaluate_and_command(obs){'\n'}
-              {'            '}
-              <span className="text-gray-500"># Execute orders: Build, Harvest, Attack!</span>
-              {'\n'}
-              {'            '}obs = <span className="text-blue-400">await</span>{' '}
-              env.step(tactical_decision){'\n'}
+              <span className="text-gray-500">$ </span>
+              <span className="text-green-400">pip install</span> openra-rl{'\n'}
+              <span className="text-gray-500">$ </span>
+              <span className="text-green-400">openra-rl play</span>{'\n\n'}
+              <span className="text-cyan-400">  Welcome to OpenRA-RL!</span>{'\n'}
+              <span className="text-gray-400">  Choose provider:</span>{'\n'}
+              <span className="text-gray-400">    [1] OpenRouter (cloud)</span>{'\n'}
+              <span className="text-gray-400">    [2] Ollama (local, free)</span>{'\n'}
+              <span className="text-gray-400">    [3] LM Studio (local, free)</span>{'\n'}
+              <span className="text-gray-500">  {'>'} </span>
+              <span className="text-white">2</span>{'\n\n'}
+              <span className="text-green-400">  ✔ Config saved</span>{'\n'}
+              <span className="text-cyan-400">  Pulling game server image...</span> done{'\n'}
+              <span className="text-cyan-400">  Starting game server...</span> ready!{'\n\n'}
+              <span className="text-yellow-300">  Starting LLM agent (qwen3:32b via Ollama)...</span>{'\n'}
+              <span className="text-gray-400">  [Turn 1] Planning phase: studying opponent...</span>{'\n'}
+              <span className="text-gray-400">  [Turn 5] Building power plant...</span>{'\n'}
+              <span className="text-gray-400">  [Turn 12] Training tanks at war factory...</span>{'\n'}
+              <span className="text-gray-400">  [Turn 25] Attack force assembled — engaging enemy!</span>{'\n'}
             </pre>
           </div>
         </div>

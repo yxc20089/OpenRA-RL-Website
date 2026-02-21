@@ -41,9 +41,9 @@ const features = [
   },
   {
     icon: TowerIcon,
-    title: 'Instant Deployment',
+    title: 'One-Line Deploy',
     description:
-      "You don't need to be an engine developer. Launch the entire warzone locally with a single command and connect your Python agent instantly.",
+      'pip install openra-rl && openra-rl play. The CLI pulls the Docker image, starts the server, and launches your agent. Zero config on repeat runs.',
   },
 ];
 

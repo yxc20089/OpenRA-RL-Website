@@ -1,10 +1,10 @@
 import React from 'react';
 
 const stats = [
-  {value: '100%', label: 'FREE & OPEN SOURCE'},
+  {value: '1 LINE', label: 'INSTALL & PLAY'},
+  {value: '48', label: 'MCP GAME TOOLS'},
   {value: 'LOCAL', label: 'OR CLOUD MODELS'},
-  {value: 'FULL', label: 'AUTONOMY'},
-  {value: 'CLASSIC', label: 'RTS GAMEPLAY'},
+  {value: '100%', label: 'FREE & OPEN SOURCE'},
 ];
 
 export default function StatsBar() {

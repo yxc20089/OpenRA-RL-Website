@@ -5,42 +5,74 @@ title: Docker Deployment
 
 # Docker Deployment
 
-OpenRA-RL provides Docker images for reproducible deployment and headless RL training.
+OpenRA-RL provides pre-built Docker images on GHCR for zero-build deployment. The CLI manages the container automatically, but you can also manage it directly.
 
 ## Quick Start
 
-```bash
-# Build the image
-cd docker && bash build.sh && cd ..
+The simplest way — the CLI handles everything:
 
-# Start the game server
-docker compose up openra-rl
+```bash
+pip install openra-rl
+openra-rl play
+```
+
+This pulls `ghcr.io/yxc20089/openra-rl:latest` automatically on first run.
+
+## Server Management (CLI)
+
+```bash
+openra-rl server start              # Start game server container
+openra-rl server start --port 9000  # Custom port
+openra-rl server start --difficulty hard  # Hard AI opponent
+openra-rl server status             # Check if running
+openra-rl server logs --follow      # Tail logs
+openra-rl server stop               # Stop container
 ```
 
 The server exposes:
 - **Port 8000** — HTTP/WebSocket (OpenEnv protocol)
 - **Port 9999** — gRPC (direct bridge access)
 
-## Docker Compose Services
+## Pre-built Images
+
+| Image | Description |
+|-------|-------------|
+| `ghcr.io/yxc20089/openra-rl:latest` | Latest release |
+| `ghcr.io/yxc20089/openra-rl:0.2.0` | Specific version |
+
+Pull manually:
+```bash
+docker pull ghcr.io/yxc20089/openra-rl:latest
+```
+
+## Docker Compose (Development)
+
+For development with docker-compose, the compose file defaults to the GHCR image but can build locally:
 
 ```yaml
 services:
-  openra-rl:      # Game server
-  agent:          # LLM agent (needs OPENROUTER_API_KEY)
-  mcp-bot:        # MCP bot with planning tools
+  openra-rl:
+    image: ${OPENRA_RL_IMAGE:-ghcr.io/yxc20089/openra-rl:latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
 ```
 
-Run with an agent:
+### Services
+
 ```bash
-# Scripted bot (connect from host)
+# Game server only
 docker compose up openra-rl
-python examples/scripted_bot.py
 
 # LLM agent (containerized)
-docker compose up openra-rl agent
+OPENROUTER_API_KEY=sk-or-... docker compose up agent
 
 # MCP bot (containerized)
-docker compose up openra-rl mcp-bot
+docker compose run mcp-bot
+
+# Build from source instead of pulling
+OPENRA_RL_IMAGE=openra-rl docker compose build
+docker compose up openra-rl
 ```
 
 ## Headless Mode (Null Platform)
@@ -70,19 +102,21 @@ Adjust in `docker-compose.yaml` based on your training setup.
 
 | Variable | Default | Description |
 |----------|---------|-------------|
+| `BOT_TYPE` | `normal` | AI difficulty: easy, normal, hard |
 | `AI_SLOT` | — | AI player slot configuration |
-| `BOT_TYPE` | — | Built-in AI type |
 | `RECORD_REPLAYS` | `false` | Save `.orarep` replay files |
 | `DISPLAY` | `:99` | X11 display (ignored in Null Platform) |
 | `DOTNET_ROLL_FORWARD` | `LatestMajor` | .NET runtime version policy |
 
-## Building for Different Architectures
-
-The Docker image supports both `amd64` and `arm64`:
+## Building from Source
 
 ```bash
+# Clone with submodules
+git clone --recurse-submodules https://github.com/yxc20089/OpenRA-RL.git
+cd OpenRA-RL
+
 # Build for current platform
-docker build -f Dockerfile -t openra-rl .
+docker build -t openra-rl .
 
 # Multi-platform build
 docker buildx build --platform linux/amd64,linux/arm64 -t openra-rl .
@@ -90,9 +124,18 @@ docker buildx build --platform linux/amd64,linux/arm64 -t openra-rl .
 
 **Note**: On `arm64`, the Grpc.Tools `protoc` compiler crashes (SIGSEGV). The build uses pre-generated C# protobuf files with `SKIP_PROTOC=true` to work around this.
 
+## Replays
+
+Games save `.orarep` replay files inside the container. Extract them:
+```bash
+docker cp openra-rl-server:/root/.config/openra/Replays ./replays
+```
+
 ## Health Check
 
 Verify the server is running:
 ```bash
 curl http://localhost:8000/health
+# Or:
+openra-rl server status
 ```

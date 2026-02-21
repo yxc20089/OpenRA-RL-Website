@@ -5,18 +5,17 @@ title: Roadmap
 
 # Roadmap
 
-## Current Version: v0.2.0
+## Current Version: v0.3.0
 
-OpenRA-RL has completed 8 development sprints with 418 tests passing.
+OpenRA-RL has completed 9 development sprints with 418 tests passing.
 
-### What's New in v0.2.0
+### What's New in v0.3.0
 
-- **One-line install**: `pip install openra-rl && openra-rl play`
-- **Interactive CLI** with setup wizard, Docker management, and diagnostics
-- **Pre-built Docker images** on GHCR (no more 20-min builds)
-- **Standard MCP server** (stdio) for OpenClaw and Claude Desktop
-- **Published on [PyPI](https://pypi.org/project/openra-rl/)**, [GHCR](https://ghcr.io/yxc20089/openra-rl), and [ClawHub](https://clawhub.ai/skill/openra-rl)
-- **CI/CD**: GitHub Actions for testing, Docker publish, and PyPI publish
+- **Replay viewer**: Watch game replays in your browser via `openra-rl replay watch` (VNC-in-Docker, zero local install)
+- **Replay auto-copy**: Replays automatically saved to `~/.openra-rl/replays/` after each game
+- **Version tracking**: Replays record which engine version was used; old replays always viewable
+- **Local server mode**: `openra-rl play --local` for developers with local OpenRA builds
+- **Engine version selection**: Multiple Docker image versions can coexist; choose at play time
 
 ### Completed Features
 
@@ -40,6 +39,9 @@ OpenRA-RL has completed 8 development sprints with 418 tests passing.
 | MCP stdio server + OpenClaw skill | Done | 8 |
 | Pre-built Docker images on GHCR | Done | 8 |
 | PyPI package + CI/CD workflows | Done | 8 |
+| Replay viewer (VNC-in-Docker, browser-based) | Done | 9 |
+| Local server mode (`--local` flag) | Done | 9 |
+| Engine version management + replay manifest | Done | 9 |
 
 ### Supported Game
 
@@ -77,7 +79,7 @@ OpenRA-RL has completed 8 development sprints with 418 tests passing.
 - **Full documentation**: API docs, tutorials, research guides
 - **Community benchmarks**: Published baseline results for common agents
 - **Multi-mod support**: Beyond Red Alert (Tiberian Dawn, Dune 2000)
-- **Replay viewer**: Web-based replay visualization for OpenRA-Bench
+- **Replay analytics**: Post-game analysis and metrics from replay data
 
 ---
 

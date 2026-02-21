@@ -38,7 +38,7 @@ The server exposes:
 | Image | Description |
 |-------|-------------|
 | `ghcr.io/yxc20089/openra-rl:latest` | Latest release |
-| `ghcr.io/yxc20089/openra-rl:0.2.0` | Specific version |
+| `ghcr.io/yxc20089/openra-rl:0.3.0` | Specific version |
 
 Pull manually:
 ```bash
@@ -104,7 +104,7 @@ Adjust in `docker-compose.yaml` based on your training setup.
 |----------|---------|-------------|
 | `BOT_TYPE` | `normal` | AI difficulty: easy, normal, hard |
 | `AI_SLOT` | — | AI player slot configuration |
-| `RECORD_REPLAYS` | `false` | Save `.orarep` replay files |
+| `RECORD_REPLAYS` | `true` | Save `.orarep` replay files |
 | `DISPLAY` | `:99` | X11 display (ignored in Null Platform) |
 | `DOTNET_ROLL_FORWARD` | `LatestMajor` | .NET runtime version policy |
 
@@ -126,7 +126,29 @@ docker buildx build --platform linux/amd64,linux/arm64 -t openra-rl .
 
 ## Replays
 
-Games save `.orarep` replay files inside the container. Extract them:
+After each game, replays are automatically copied to `~/.openra-rl/replays/`.
+
+### Watch replays in your browser
+
+The replay viewer runs inside Docker using the same engine that recorded the game, streamed to your browser via VNC:
+
+```bash
+openra-rl replay watch              # Watch the latest replay (opens browser)
+openra-rl replay watch <file>       # Watch a specific .orarep file
+openra-rl replay list               # List replays (Docker + local)
+openra-rl replay copy               # Copy replays from Docker to local
+openra-rl replay stop               # Stop the replay viewer
+```
+
+No local game install needed — the viewer uses noVNC so it works in any browser.
+
+### Version tracking
+
+Each replay records which Docker image version was used. When you upgrade `openra-rl`, old replays are still viewable because the viewer automatically uses the original engine version from the manifest at `~/.openra-rl/replays/manifest.json`.
+
+### Manual extraction
+
+You can also copy replay files directly from the container:
 ```bash
 docker cp openra-rl-server:/root/.config/openra/Replays ./replays
 ```

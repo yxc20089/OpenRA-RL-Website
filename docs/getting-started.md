@@ -65,6 +65,7 @@ This verifies Docker, Python, saved config, and server status.
 openra-rl play         Run the LLM agent (wizard on first use)
 openra-rl config       Re-run the setup wizard
 openra-rl server       start | stop | status | logs
+openra-rl replay       watch | list | copy | stop
 openra-rl mcp-server   Start MCP stdio server (for OpenClaw / Claude Desktop)
 openra-rl doctor       Check system prerequisites
 openra-rl version      Print version

@@ -4,12 +4,15 @@ import HeroSection from '../components/HeroSection';
 import StatsBar from '../components/StatsBar';
 import FeatureGrid from '../components/FeatureGrid';
 import CodeTerminal from '../components/CodeTerminal';
+import {useTranslation} from '../i18n';
 
 export default function Home() {
+  const t = useTranslation();
+
   return (
     <CustomLayout
-      title="OpenRA-RL | Command AI To Play Red Alert"
-      description="The ultimate open-source project that lets you wire up Large Language Models to play Red Alert. Use local or cloud AI models to build bases, harvest ore, and conquer."
+      title={t.home.pageTitle}
+      description={t.home.pageDescription}
     >
       <div className="animate-fade-in">
         <HeroSection />

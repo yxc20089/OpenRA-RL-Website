@@ -1,4 +1,5 @@
 import React from 'react';
+import {useTranslation} from '../i18n';
 
 const rankings = [
   {rank: 1, name: 'DoomBot-Claude3', dev: 'CyberDyne', type: 'LLM (Claude-3-Opus)', winRate: '89.2%', matches: 142, elo: 2450},
@@ -10,19 +11,21 @@ const rankings = [
 ];
 
 export default function LeaderboardTable() {
+  const t = useTranslation();
+
   return (
     <div className="bg-[#050505] border border-gray-800 rounded-lg overflow-hidden shadow-2xl mb-16">
       <div className="overflow-x-auto">
         <table className="table-military">
           <thead>
             <tr>
-              <th className="w-16 text-center">RANK</th>
-              <th>AGENT CODENAME</th>
-              <th>DEVELOPER</th>
-              <th>ARCHITECTURE</th>
-              <th className="text-right">WIN RATE</th>
-              <th className="text-right">MATCHES</th>
-              <th className="text-right text-yellow-500">ELO SCORE</th>
+              <th className="w-16 text-center">{t.leaderboard.thRank}</th>
+              <th>{t.leaderboard.thAgent}</th>
+              <th>{t.leaderboard.thDev}</th>
+              <th>{t.leaderboard.thArch}</th>
+              <th className="text-right">{t.leaderboard.thWin}</th>
+              <th className="text-right">{t.leaderboard.thMatches}</th>
+              <th className="text-right text-yellow-500">{t.leaderboard.thElo}</th>
             </tr>
           </thead>
           <tbody>

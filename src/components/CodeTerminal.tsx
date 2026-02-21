@@ -1,27 +1,27 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
 import {Book, Code} from 'lucide-react';
+import {useTranslation} from '../i18n';
 
 export default function CodeTerminal() {
+  const t = useTranslation();
+
   return (
     <section className="py-24 bg-[#050505] border-y border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div>
-          <h2 className="font-teko text-5xl text-white mb-6">ZERO TO PLAYING IN SECONDS</h2>
+          <h2 className="font-teko text-5xl text-white mb-6">{t.home.apiTitle}</h2>
           <p className="text-lg text-gray-400 mb-6 leading-relaxed">
-            Install from PyPI, run one command, and watch your AI play Red Alert.
-            The CLI handles Docker, configuration, and the game server automatically.
+            {t.home.apiDesc1}
           </p>
           <p className="text-lg text-gray-400 mb-8 leading-relaxed">
-            Works with <strong>cloud models</strong> (Claude, GPT, Qwen via OpenRouter) or{' '}
-            <strong>local models</strong> (Ollama, LM Studio) — no API key needed for local.
-            Also available as an <strong>MCP server</strong> for OpenClaw and Claude Desktop.
+            {t.home.apiDesc2}
           </p>
           <Link
             to="/docs/getting-started"
             className="btn-soviet font-teko text-2xl px-6 py-2 flex items-center gap-2 text-white no-underline hover:no-underline hover:text-white inline-flex"
           >
-            <Book className="w-5 h-5" /> GET STARTED
+            <Book className="w-5 h-5" /> {t.home.btnDocs}
           </Link>
         </div>
 

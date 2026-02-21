@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "最新版",
+    "description": "The label for version current"
+  },
+  "sidebar.docsSidebar.category.Reference": {
+    "message": "参考文档",
+    "description": "The label for category 'Reference' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Guides": {
+    "message": "使用指南",
+    "description": "The label for category 'Guides' in sidebar 'docsSidebar'"
+  }
+}

@@ -2,14 +2,10 @@ import React, {useState, type ReactNode} from 'react';
 import Link from '@docusaurus/Link';
 import Head from '@docusaurus/Head';
 import {useLocation} from '@docusaurus/router';
-import {Menu, X, ChevronRight, Book, Github} from 'lucide-react';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import {Menu, X, ChevronRight, Book, Github, Globe} from 'lucide-react';
 import {RadarIcon} from './Icons';
-
-const navLinks = [
-  {path: '/', label: 'COMMAND CENTER'},
-  {path: '/leaderboard', label: 'LEADERBOARD'},
-  {path: '/research', label: 'R&D DIVISION'},
-];
+import {useTranslation} from '../i18n';
 
 export default function CustomLayout({
   children,
@@ -22,6 +18,20 @@ export default function CustomLayout({
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const t = useTranslation();
+  const {i18n} = useDocusaurusContext();
+  const currentLocale = i18n.currentLocale;
+
+  const navLinks = [
+    {path: '/', label: t.nav.commandCenter},
+    {path: '/leaderboard', label: t.nav.leaderboard},
+    {path: '/research', label: t.nav.research},
+  ];
+
+  // Build the alternate locale URL
+  const alternatePath = currentLocale === 'en'
+    ? `/zh${location.pathname}`
+    : location.pathname.replace(/^\/zh/, '') || '/';
 
   return (
     <div className="openra-layout min-h-screen bg-[#0a0a0a] text-gray-300 selection:bg-red-900 selection:text-white relative overflow-hidden">
@@ -62,7 +72,7 @@ export default function CustomLayout({
                   to="/docs/getting-started"
                   className="font-teko text-xl tracking-wider px-3 py-2 text-gray-400 hover:text-white no-underline hover:no-underline flex items-center gap-1"
                 >
-                  DOCS <Book className="w-4 h-4 mb-1" />
+                  {t.nav.docs} <Book className="w-4 h-4 mb-1" />
                 </Link>
                 <a
                   href="https://github.com/yxc20089/OpenRA-RL"
@@ -72,10 +82,22 @@ export default function CustomLayout({
                 >
                   GITHUB <Github className="w-4 h-4 mb-1" />
                 </a>
+                <a
+                  href={alternatePath}
+                  className="font-teko text-xl tracking-wider px-3 py-2 text-yellow-500 hover:text-yellow-400 no-underline hover:no-underline flex items-center gap-1 ml-4 border border-yellow-800/50 rounded bg-yellow-900/10"
+                >
+                  <Globe className="w-4 h-4 mb-1" /> {t.nav.langLabel}
+                </a>
               </div>
             </div>
 
-            <div className="md:hidden">
+            <div className="md:hidden flex items-center gap-4">
+              <a
+                href={alternatePath}
+                className="text-yellow-500 font-teko text-xl flex items-center gap-1 no-underline hover:no-underline"
+              >
+                <Globe className="w-4 h-4" /> {t.nav.langLabel}
+              </a>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-gray-400 hover:text-white bg-transparent border-none cursor-pointer"
@@ -104,7 +126,7 @@ export default function CustomLayout({
               onClick={() => setIsMenuOpen(false)}
               className="block w-full text-left font-teko text-2xl text-gray-300 hover:text-red-500 no-underline hover:no-underline"
             >
-              DOCS
+              {t.nav.docs}
             </Link>
             <a
               href="https://github.com/yxc20089/OpenRA-RL"
@@ -131,47 +153,47 @@ export default function CustomLayout({
               <RadarIcon className="h-8 w-8 text-red-600" /> OPENRA-RL
             </span>
             <p className="mt-4 text-gray-500 terminal-text text-sm">
-              &gt; STATUS: ONLINE<br />
-              &gt; MISSION: ADVANCE OPEN-SOURCE AI RESEARCH IN RTS GAMING.<br />
-              &gt; COPYRIGHT &copy; {new Date().getFullYear()} OPENRA-RL CONTRIBUTORS.
+              &gt; {t.footer.status}<br />
+              &gt; {t.footer.mission}<br />
+              &gt; {t.footer.copyright} &copy; {new Date().getFullYear()} OPENRA-RL CONTRIBUTORS.
             </p>
           </div>
           <div>
-            <h3 className="font-teko text-2xl text-white mb-4">INTEL</h3>
+            <h3 className="font-teko text-2xl text-white mb-4">{t.footer.intel}</h3>
             <ul className="space-y-2 text-sm list-none pl-0">
               <li>
                 <Link to="/docs/getting-started" className="hover:text-red-500 transition-colors flex items-center gap-2 text-gray-300 no-underline hover:no-underline">
-                  <ChevronRight className="w-4 h-4" /> Documentation
+                  <ChevronRight className="w-4 h-4" /> {t.footer.documentation}
                 </Link>
               </li>
               <li>
                 <Link to="/docs/architecture" className="hover:text-red-500 transition-colors flex items-center gap-2 text-gray-300 no-underline hover:no-underline">
-                  <ChevronRight className="w-4 h-4" /> Architecture
+                  <ChevronRight className="w-4 h-4" /> {t.footer.architecture}
                 </Link>
               </li>
               <li>
                 <Link to="/docs/api-reference" className="hover:text-red-500 transition-colors flex items-center gap-2 text-gray-300 no-underline hover:no-underline">
-                  <ChevronRight className="w-4 h-4" /> API Reference
+                  <ChevronRight className="w-4 h-4" /> {t.footer.apiReference}
                 </Link>
               </li>
             </ul>
           </div>
           <div>
-            <h3 className="font-teko text-2xl text-white mb-4">ALLIANCES</h3>
+            <h3 className="font-teko text-2xl text-white mb-4">{t.footer.alliances}</h3>
             <ul className="space-y-2 text-sm list-none pl-0">
               <li>
                 <a href="https://www.openra.net/" target="_blank" rel="noopener noreferrer" className="hover:text-red-500 transition-colors flex items-center gap-2 text-gray-300 no-underline hover:no-underline">
-                  <ChevronRight className="w-4 h-4" /> OpenRA Engine
+                  <ChevronRight className="w-4 h-4" /> {t.footer.openraEngine}
                 </a>
               </li>
               <li>
                 <a href="https://huggingface.co/openenv" target="_blank" rel="noopener noreferrer" className="hover:text-red-500 transition-colors flex items-center gap-2 text-gray-300 no-underline hover:no-underline">
-                  <ChevronRight className="w-4 h-4" /> OpenEnv Framework
+                  <ChevronRight className="w-4 h-4" /> {t.footer.openenvFramework}
                 </a>
               </li>
               <li>
                 <Link to="/leaderboard" className="hover:text-red-500 transition-colors flex items-center gap-2 text-gray-300 no-underline hover:no-underline">
-                  <ChevronRight className="w-4 h-4" /> Leaderboard
+                  <ChevronRight className="w-4 h-4" /> {t.footer.leaderboard}
                 </Link>
               </li>
             </ul>

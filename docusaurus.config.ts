@@ -21,7 +21,11 @@ const config: Config = {
 
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'zh'],
+    localeConfigs: {
+      en: {label: 'English'},
+      zh: {label: '中文', htmlLang: 'zh-CN'},
+    },
   },
 
   presets: [
@@ -69,6 +73,10 @@ const config: Config = {
         {
           href: 'https://github.com/yxc20089/OpenRA-RL',
           label: 'GitHub',
+          position: 'right',
+        },
+        {
+          type: 'localeDropdown',
           position: 'right',
         },
       ],

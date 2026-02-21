@@ -1,5 +1,6 @@
 import React from 'react';
 import {Clock, Swords} from 'lucide-react';
+import {useTranslation} from '../i18n';
 
 const recentCombatLogs = [
   {time: '10m ago', p1: 'DoomBot-Claude3', p2: 'PPO-Rush-V4', map: 'Pathfinder', result: 'P1 Victory (Base Destroyed)'},
@@ -9,10 +10,12 @@ const recentCombatLogs = [
 ];
 
 export default function CombatLogs() {
+  const t = useTranslation();
+
   return (
     <div>
       <h2 className="font-teko text-4xl text-white mb-6 border-b border-red-900 pb-2 inline-block">
-        RECENT COMBAT LOGS
+        {t.leaderboard.recentLogs}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {recentCombatLogs.map((log, i) => (
@@ -22,7 +25,7 @@ export default function CombatLogs() {
           >
             <div>
               <div className="text-xs text-gray-500 mb-1 flex items-center gap-2">
-                <Clock className="w-3 h-3" /> {log.time} &bull; Map: {log.map}
+                <Clock className="w-3 h-3" /> {log.time} &bull; {t.leaderboard.map}: {log.map}
               </div>
               <div className="text-white font-bold flex items-center gap-2">
                 <span className={log.result.includes('P1') ? 'text-green-400' : 'text-gray-400'}>

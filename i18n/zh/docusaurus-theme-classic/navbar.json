@@ -1,0 +1,26 @@
+{
+  "title": {
+    "message": "OpenRA-RL",
+    "description": "The title in the navbar"
+  },
+  "item.label.Docs": {
+    "message": "战术文档",
+    "description": "Navbar item with label Docs"
+  },
+  "item.label.Blog": {
+    "message": "战地日志",
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.Leaderboard": {
+    "message": "全球战网",
+    "description": "Navbar item with label Leaderboard"
+  },
+  "item.label.R&D Division": {
+    "message": "前沿 AI 研发部",
+    "description": "Navbar item with label R&D Division"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
+}

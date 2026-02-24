@@ -5,17 +5,17 @@ title: Roadmap
 
 # Roadmap
 
-## Current Version: v0.3.0
+## Current Version: v0.3.1
 
-OpenRA-RL has completed 9 development sprints with 418 tests passing.
+OpenRA-RL has completed 10 development sprints with 449+ tests passing across 3 repos.
 
-### What's New in v0.3.0
+### What's New in v0.3.1
 
-- **Replay viewer**: Watch game replays in your browser via `openra-rl replay watch` (VNC-in-Docker, zero local install)
-- **Replay auto-copy**: Replays automatically saved to `~/.openra-rl/replays/` after each game
-- **Version tracking**: Replays record which engine version was used; old replays always viewable
-- **Local server mode**: `openra-rl play --local` for developers with local OpenRA builds
-- **Engine version selection**: Multiple Docker image versions can coexist; choose at play time
+- **Multi-dimensional reward vector**: 8-dimensional reward signal (combat, economy, infrastructure, intelligence, composition, tempo, disruption, outcome) for richer RL training
+- **Damage matrix**: Unit effectiveness lookup table derived from weapon YAML data — enables cost-aware combat evaluation
+- **OpenRA-RL-Util**: New shared utility library ([openra-rl-util](https://github.com/yxc20089/OpenRA-RL-Util)) powering reward computation, scoring rubrics, and damage analysis across the ecosystem
+- **OpenRA-Bench scoring fix**: Eliminated scoring formula duplication — single source of truth in openra-rl-util
+- **OpenRA-Bench test suite**: 25 tests covering leaderboard app and evaluation harness
 
 ### Completed Features
 
@@ -42,6 +42,10 @@ OpenRA-RL has completed 9 development sprints with 418 tests passing.
 | Replay viewer (VNC-in-Docker, browser-based) | Done | 9 |
 | Local server mode (`--local` flag) | Done | 9 |
 | Engine version management + replay manifest | Done | 9 |
+| Multi-dimensional reward vector (8 dimensions) | Done | 10 |
+| Damage matrix (unit effectiveness data) | Done | 10 |
+| Shared utility library (openra-rl-util) | Done | 10 |
+| OpenRA-Bench scoring fix + test suite | Done | 10 |
 
 ### Supported Game
 
@@ -57,19 +61,17 @@ OpenRA-RL has completed 9 development sprints with 418 tests passing.
 
 ## Upcoming Milestones
 
-### v0.3 — OpenRA-Bench + Multi-Agent
+### v0.4 — OpenRA-Bench Deployment + Multi-Agent
 
-- **OpenRA-Bench**: HuggingFace Space leaderboard for agent evaluation
-  - Standardized evaluation protocol (maps, opponents, metrics)
-  - Replay data collection and verification
-  - Community submissions
+- **HuggingFace Space**: Deploy OpenRA-Bench leaderboard to HuggingFace Spaces
 - **Multi-agent support**: Agent vs Agent matches
-- **Evaluation scripts**: Automated N-game benchmarking with metrics export
+- **ScriptedBot extraction**: Move ScriptedBot from examples to library
+- **Community submissions**: PR-based leaderboard submission workflow
 
-### v0.4 — RL Training Pipelines
+### v0.5 — RL Training Pipelines
 
 - **PPO/SAC integration**: Training scripts with TRL and Stable Baselines3
-- **Reward shaping**: Configurable multi-component reward functions
+- **Reward vector training**: Use 8-dimensional reward for multi-objective RL
 - **Curriculum learning**: Progressive difficulty (Easy → Normal → Hard)
 - **Observation encoders**: CNN for spatial tensor, Transformer for entity lists
 

@@ -3,7 +3,7 @@ import Link from '@docusaurus/Link';
 import Head from '@docusaurus/Head';
 import {useLocation} from '@docusaurus/router';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import {Menu, X, ChevronRight, Book, Github, Globe} from 'lucide-react';
+import {Menu, X, ChevronRight, Book, Github, Globe, Play} from 'lucide-react';
 import {RadarIcon} from './Icons';
 import {useTranslation} from '../i18n';
 
@@ -68,6 +68,14 @@ export default function CustomLayout({
                     {link.label}
                   </Link>
                 ))}
+                <a
+                  href="https://openra-rl-openra-rl.hf.space/try"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-teko text-xl tracking-wider px-3 py-2 text-red-500 hover:text-red-400 no-underline hover:no-underline flex items-center gap-1 font-bold"
+                >
+                  {t.nav.tryIt} <Play className="w-4 h-4 mb-1" />
+                </a>
                 <Link
                   to="/docs/getting-started"
                   className="font-teko text-xl tracking-wider px-3 py-2 text-gray-400 hover:text-white no-underline hover:no-underline flex items-center gap-1"
@@ -121,6 +129,15 @@ export default function CustomLayout({
                 {link.label}
               </Link>
             ))}
+            <a
+              href="https://openra-rl-openra-rl.hf.space/try"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMenuOpen(false)}
+              className="block w-full text-left font-teko text-2xl text-red-500 hover:text-red-400 no-underline hover:no-underline font-bold"
+            >
+              {t.nav.tryIt}
+            </a>
             <Link
               to="/docs/getting-started"
               onClick={() => setIsMenuOpen(false)}
@@ -192,9 +209,9 @@ export default function CustomLayout({
                 </a>
               </li>
               <li>
-                <Link to="/leaderboard" className="hover:text-red-500 transition-colors flex items-center gap-2 text-gray-300 no-underline hover:no-underline">
+                <a href="https://huggingface.co/spaces/openra-rl/OpenRA-Bench" target="_blank" rel="noopener noreferrer" className="hover:text-red-500 transition-colors flex items-center gap-2 text-gray-300 no-underline hover:no-underline">
                   <ChevronRight className="w-4 h-4" /> {t.footer.leaderboard}
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

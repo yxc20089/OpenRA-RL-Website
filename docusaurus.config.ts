@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'OpenRA-RL',
   tagline: 'Train AI Agents to Play Real-Time Strategy',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   future: {
     v4: true,
@@ -18,6 +18,19 @@ const config: Config = {
   projectName: 'OpenRA-RL-Website',
 
   onBrokenLinks: 'throw',
+
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {type: 'application/ld+json'},
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'OpenRA-RL',
+        url: 'https://openra-rl.dev',
+      }),
+    },
+  ],
 
   i18n: {
     defaultLocale: 'en',
@@ -109,8 +122,8 @@ const config: Config = {
               href: 'https://github.com/yxc20089/OpenRA-Bench',
             },
             {
-              label: 'OpenEnv Framework',
-              href: 'https://huggingface.co/openenv',
+              label: 'HuggingFace Community',
+              href: 'https://huggingface.co/openra-rl',
             },
             {
               label: 'OpenRA Game Engine',

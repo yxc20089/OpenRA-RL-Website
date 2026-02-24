@@ -16,7 +16,7 @@ export type Translations = {
     architecture: string;
     apiReference: string;
     openraEngine: string;
-    openenvFramework: string;
+    hfCommunity: string;
     leaderboard: string;
   };
   home: {
@@ -39,6 +39,7 @@ export type Translations = {
   leaderboard: {
     subtitle: string;
     title: string;
+    hfLink: string;
     thRank: string;
     thAgent: string;
     thDev: string;
@@ -85,7 +86,7 @@ const en: Translations = {
     architecture: 'Architecture',
     apiReference: 'API Reference',
     openraEngine: 'OpenRA Engine',
-    openenvFramework: 'OpenEnv Framework',
+    hfCommunity: 'HuggingFace Community',
     leaderboard: 'Leaderboard',
   },
   home: {
@@ -149,6 +150,7 @@ const en: Translations = {
   leaderboard: {
     subtitle: '/GLOBAL_NETWORK/RANKINGS/',
     title: 'Global Leaderboard',
+    hfLink: 'View Full Leaderboard on Hugging Face',
     thRank: 'RANK',
     thAgent: 'AGENT CODENAME',
     thDev: 'DEVELOPER',
@@ -231,7 +233,7 @@ const zh: Translations = {
     architecture: '系统架构',
     apiReference: 'API 参考手册',
     openraEngine: 'OpenRA 引擎',
-    openenvFramework: 'OpenEnv 框架',
+    hfCommunity: 'HuggingFace 社区',
     leaderboard: '全球战网',
   },
   home: {
@@ -295,6 +297,7 @@ const zh: Translations = {
   leaderboard: {
     subtitle: '/全球网络/天梯排名/',
     title: '全球战网天梯榜',
+    hfLink: '前往 Hugging Face 查看完整排行榜',
     thRank: '军衔',
     thAgent: 'AI 指挥官代号',
     thDev: '研发团队',

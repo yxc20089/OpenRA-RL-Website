@@ -187,8 +187,8 @@ export default function CustomLayout({
                 </a>
               </li>
               <li>
-                <a href="https://huggingface.co/openenv" target="_blank" rel="noopener noreferrer" className="hover:text-red-500 transition-colors flex items-center gap-2 text-gray-300 no-underline hover:no-underline">
-                  <ChevronRight className="w-4 h-4" /> {t.footer.openenvFramework}
+                <a href="https://huggingface.co/openra-rl" target="_blank" rel="noopener noreferrer" className="hover:text-red-500 transition-colors flex items-center gap-2 text-gray-300 no-underline hover:no-underline">
+                  <ChevronRight className="w-4 h-4" /> {t.footer.hfCommunity}
                 </a>
               </li>
               <li>

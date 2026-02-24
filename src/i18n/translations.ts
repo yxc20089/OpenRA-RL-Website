@@ -3,6 +3,7 @@ export type Translations = {
     commandCenter: string;
     leaderboard: string;
     research: string;
+    tryIt: string;
     docs: string;
     langLabel: string;
   };
@@ -24,6 +25,7 @@ export type Translations = {
     title: string;
     subtitle1: string;
     subtitle2: string;
+    btnTryAI: string;
     btnDeploy: string;
     btnLeaderboard: string;
     stats: Array<{value: string; label: string}>;
@@ -73,6 +75,7 @@ const en: Translations = {
     commandCenter: 'COMMAND CENTER',
     leaderboard: 'LEADERBOARD',
     research: 'R&D DIVISION',
+    tryIt: 'TRY',
     docs: 'DOCS',
     langLabel: '中文',
   },
@@ -96,6 +99,7 @@ const en: Translations = {
       'The ultimate open-source project that lets you wire up Large Language Models to play Red Alert, the classic RTS game, fully on their own.',
     subtitle2:
       'Use local or cloud AI models to build bases, harvest ore, and conquer your enemies for free.',
+    btnTryAI: 'WATCH AI PLAY',
     btnDeploy: 'INITIATE DEPLOYMENT',
     btnLeaderboard: 'ACCESS LEADERBOARD',
     stats: [
@@ -220,6 +224,7 @@ const zh: Translations = {
     commandCenter: '作战指挥部',
     leaderboard: '全球战网',
     research: '前沿 AI 研发部',
+    tryIt: '试玩',
     docs: '战术文档',
     langLabel: 'EN',
   },
@@ -243,6 +248,7 @@ const zh: Translations = {
       '这是属于代码与钢铁的终极开源演练场。将大语言模型（LLM）化身为你的前线总指挥，让它在经典的《红色警戒》战场上为你开疆拓土。',
     subtitle2:
       '无论是本地部署还是接入云端大脑，你的 AI 大军都将全自动地采矿、建厂、暴兵，直到碾碎一切敌人！100% 免费，完全开源。',
+    btnTryAI: '观看 AI 实战',
     btnDeploy: '立即启动部署',
     btnLeaderboard: '接入全球战网',
     stats: [

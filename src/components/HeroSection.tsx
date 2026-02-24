@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
-import {ChevronRight, Terminal, Trophy} from 'lucide-react';
+import {ChevronRight, Play, Terminal, Trophy} from 'lucide-react';
 import {useTranslation} from '../i18n';
 
 export default function HeroSection() {
@@ -27,9 +27,17 @@ export default function HeroSection() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <a
+            href="https://openra-rl-openra-rl.hf.space/try"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-soviet font-teko text-3xl px-8 py-3 flex items-center justify-center gap-2 text-white no-underline hover:no-underline hover:text-white"
+          >
+            {t.home.btnTryAI} <Play className="w-7 h-7" />
+          </a>
           <Link
             to="/docs/getting-started"
-            className="btn-soviet font-teko text-3xl px-8 py-3 flex items-center justify-center gap-2 text-white no-underline hover:no-underline hover:text-white"
+            className="btn-ghost font-teko text-3xl px-8 py-3 flex items-center justify-center gap-2 no-underline hover:no-underline"
           >
             {t.home.btnDeploy} <ChevronRight className="w-8 h-8" />
           </Link>

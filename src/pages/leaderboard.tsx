@@ -23,7 +23,7 @@ export default function Leaderboard() {
               {t.leaderboard.title}
             </h1>
             <a
-              href="https://huggingface.co/openra-rl"
+              href="https://huggingface.co/spaces/openra-rl/OpenRA-Bench"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-600/50 text-yellow-400 hover:text-yellow-300 hover:bg-yellow-500/20 px-4 py-2 rounded font-teko text-lg tracking-wider transition-colors no-underline hover:no-underline"

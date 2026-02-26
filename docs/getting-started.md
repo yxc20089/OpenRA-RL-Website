@@ -66,6 +66,7 @@ openra-rl play         Run the LLM agent (wizard on first use)
 openra-rl config       Re-run the setup wizard
 openra-rl server       start | stop | status | logs
 openra-rl replay       watch | list | copy | stop
+openra-rl bench        submit   Upload results to the leaderboard
 openra-rl mcp-server   Start MCP stdio server (for OpenClaw / Claude Desktop)
 openra-rl doctor       Check system prerequisites
 openra-rl version      Print version
@@ -179,3 +180,4 @@ asyncio.run(main())
 - [Action Space](/docs/action-space) — What your agent can do
 - [Agent Types](/docs/agents) — Scripted, MCP, and LLM agent architectures
 - [Docker Deployment](/docs/docker) — Server management and deployment
+- [Benchmarking](/docs/benchmarking) — Submit results to the leaderboard

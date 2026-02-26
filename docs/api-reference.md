@@ -21,6 +21,7 @@ pip install openra-rl
 | `openra-rl server stop` | Stop the game server |
 | `openra-rl server status` | Check server status |
 | `openra-rl server logs [-f]` | View server logs |
+| `openra-rl bench submit <file>` | Upload results to the leaderboard |
 | `openra-rl mcp-server` | Start MCP stdio server |
 | `openra-rl doctor` | Check prerequisites |
 | `openra-rl version` | Print version |
@@ -36,6 +37,19 @@ pip install openra-rl
 | `--port` | Game server port (default: 8000) |
 | `--server-url` | Connect to existing server (skip Docker) |
 | `--verbose` | Detailed output |
+
+### `openra-rl bench submit` flags
+
+| Flag | Description |
+|------|-------------|
+| `<json_file>` | Path to bench export JSON file (required) |
+| `--agent-name` | Override agent name in the submission |
+| `--agent-type` | Override agent type (Scripted / LLM / RL) |
+| `--agent-url` | GitHub/project URL for the agent |
+| `--replay` | Path to `.orarep` replay file to upload |
+| `--bench-url` | Leaderboard URL (default: HF Space) |
+
+See [Benchmarking](/docs/benchmarking) for the full submission workflow.
 
 ## MCP Server
 

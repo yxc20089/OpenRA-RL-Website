@@ -5,9 +5,19 @@ title: Roadmap
 
 # Roadmap
 
-## Current Version: v0.3.1
+## Current Version: v0.4.0
 
-OpenRA-RL has completed 10 development sprints with 449+ tests passing across 3 repos.
+OpenRA-RL has completed 11 development sprints with 515+ tests passing across 4 repos.
+
+### What's New in v0.4.0
+
+- **OpenRA-Bench leaderboard**: Live on [HuggingFace Spaces](https://huggingface.co/spaces/openra-rl/OpenRA-Bench) — ranked agent comparison with filtering by type and difficulty
+- **Auto-upload**: Game results automatically submitted to the leaderboard after `openra-rl play`
+- **Custom agent identity**: Name your agent, declare its type, and link to your GitHub repo
+- **Replay uploads & downloads**: Submit replays with results; download them from the leaderboard
+- **CLI bench submit**: `openra-rl bench submit result.json --replay game.orarep`
+- **Custom agent export**: `build_bench_export()` helper for RL, CNN, and multi-agent systems
+- **5 opponent tiers**: Beginner, Easy, Medium, Normal, Hard
 
 ### What's New in v0.3.1
 
@@ -46,6 +56,12 @@ OpenRA-RL has completed 10 development sprints with 449+ tests passing across 3 
 | Damage matrix (unit effectiveness data) | Done | 10 |
 | Shared utility library (openra-rl-util) | Done | 10 |
 | OpenRA-Bench scoring fix + test suite | Done | 10 |
+| OpenRA-Bench HuggingFace Space deployment | Done | 11 |
+| Auto-upload + CLI bench submit | Done | 11 |
+| Custom agent identity (name, type, URL) | Done | 11 |
+| Replay uploads and leaderboard downloads | Done | 11 |
+| Custom agent export helper (`bench_export`) | Done | 11 |
+| 5 opponent tiers (Beginner → Hard) | Done | 11 |
 
 ### Supported Game
 
@@ -61,14 +77,12 @@ OpenRA-RL has completed 10 development sprints with 449+ tests passing across 3 
 
 ## Upcoming Milestones
 
-### v0.4 — OpenRA-Bench Deployment + Multi-Agent
+### v0.5 — Multi-Agent + Training
 
-- **HuggingFace Space**: Deploy OpenRA-Bench leaderboard to HuggingFace Spaces
 - **Multi-agent support**: Agent vs Agent matches
 - **ScriptedBot extraction**: Move ScriptedBot from examples to library
-- **Community submissions**: PR-based leaderboard submission workflow
 
-### v0.5 — RL Training Pipelines
+### v0.6 — RL Training Pipelines
 
 - **PPO/SAC integration**: Training scripts with TRL and Stable Baselines3
 - **Reward vector training**: Use 8-dimensional reward for multi-objective RL

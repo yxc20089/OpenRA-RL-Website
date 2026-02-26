@@ -170,3 +170,29 @@ async with OpenRAMCPClient("http://localhost:8000") as env:
 - **Faction detection**: Check `available_production` to determine if you're Allied or Soviet.
 - **Tech tree**: War Factory requires Ore Refinery. Build order: `powr → barracks → proc → weap`.
 - **Building placement**: Completed buildings must be placed with `PLACE_BUILDING`. Unplaced buildings block further production. Use `build_and_place` for automatic placement.
+
+### Submitting Results to the Leaderboard
+
+Custom agents can export their results for the [OpenRA-Bench leaderboard](https://huggingface.co/spaces/openra-rl/OpenRA-Bench):
+
+```python
+from openra_env.bench_export import build_bench_export
+
+# After game ends, export the final observation
+export = build_bench_export(
+    obs,                                    # final observation from env.step()
+    agent_name="DeathBot-9000",
+    agent_type="RL",                        # Scripted / LLM / RL
+    opponent="Normal",
+    agent_url="https://github.com/user/deathbot",
+)
+# Saves JSON to ~/.openra-rl/bench-exports/
+```
+
+Then upload:
+
+```bash
+openra-rl bench submit ~/.openra-rl/bench-exports/bench-DeathBot-9000-*.json
+```
+
+See [Benchmarking](/docs/benchmarking) for the full workflow.

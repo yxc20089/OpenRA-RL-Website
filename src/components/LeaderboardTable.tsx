@@ -47,8 +47,9 @@ async function fetchLeaderboard(): Promise<AgentRow[]> {
     for (const line of text.split('\n')) {
       if (line.startsWith('data: ')) {
         const payload = JSON.parse(line.slice(6));
-        if (Array.isArray(payload) && payload[0]?.value?.data) {
-          const rows: any[][] = payload[0].value.data;
+        const table = payload?.[0];
+        const rows: any[][] = table?.value?.data || table?.data;
+        if (Array.isArray(rows)) {
           return rows.map((r) => ({
             rank: r[0],
             name: stripHtml(String(r[1])),

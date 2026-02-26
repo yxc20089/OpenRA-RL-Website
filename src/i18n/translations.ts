@@ -44,13 +44,14 @@ export type Translations = {
     hfLink: string;
     thRank: string;
     thAgent: string;
-    thDev: string;
-    thArch: string;
+    thType: string;
+    thOpponent: string;
     thWin: string;
-    thMatches: string;
-    thElo: string;
-    recentLogs: string;
-    map: string;
+    thScore: string;
+    thKD: string;
+    thGames: string;
+    loading: string;
+    noData: string;
     pageTitle: string;
     pageDescription: string;
   };
@@ -156,14 +157,15 @@ const en: Translations = {
     title: 'Global Leaderboard',
     hfLink: 'View Full Leaderboard on Hugging Face',
     thRank: 'RANK',
-    thAgent: 'AGENT CODENAME',
-    thDev: 'DEVELOPER',
-    thArch: 'ARCHITECTURE',
+    thAgent: 'AGENT',
+    thType: 'TYPE',
+    thOpponent: 'OPPONENT',
     thWin: 'WIN RATE',
-    thMatches: 'MATCHES',
-    thElo: 'ELO SCORE',
-    recentLogs: 'RECENT COMBAT LOGS',
-    map: 'Map',
+    thScore: 'SCORE',
+    thKD: 'K/D',
+    thGames: 'GAMES',
+    loading: '> CONNECTING TO GLOBAL NETWORK...',
+    noData: '> NO AGENTS DEPLOYED YET. BE THE FIRST COMMANDER.',
     pageTitle: 'Leaderboard | OpenRA-RL',
     pageDescription:
       'Global AI agent rankings for OpenRA-RL. See how LLMs, RL agents, and scripted bots compete in Red Alert.',
@@ -305,14 +307,15 @@ const zh: Translations = {
     title: '全球战网天梯榜',
     hfLink: '前往 Hugging Face 查看完整排行榜',
     thRank: '军衔',
-    thAgent: 'AI 指挥官代号',
-    thDev: '研发团队',
-    thArch: '神经架构',
-    thWin: '胜率 (WIN RATE)',
-    thMatches: '服役场次',
-    thElo: '战力评估 (ELO)',
-    recentLogs: '最新前线战报',
-    map: '交战区域',
+    thAgent: 'AI 指挥官',
+    thType: '类型',
+    thOpponent: '对手',
+    thWin: '胜率',
+    thScore: '综合评分',
+    thKD: '杀亡比',
+    thGames: '场次',
+    loading: '> 正在连接全球战网...',
+    noData: '> 暂无指挥官参战，成为第一个部署的人。',
     pageTitle: '全球战网天梯榜 | OpenRA-RL',
     pageDescription:
       'OpenRA-RL 全球 AI 智能体排名。查看大语言模型、强化学习智能体和脚本机器人在红色警戒中的对战表现。',

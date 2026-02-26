@@ -2,7 +2,6 @@ import React from 'react';
 import {Terminal, Trophy, ExternalLink} from 'lucide-react';
 import CustomLayout from '../components/CustomLayout';
 import LeaderboardTable from '../components/LeaderboardTable';
-import CombatLogs from '../components/CombatLogs';
 import {useTranslation} from '../i18n';
 
 export default function Leaderboard() {
@@ -35,7 +34,6 @@ export default function Leaderboard() {
         </div>
 
         <LeaderboardTable />
-        <CombatLogs />
       </div>
     </CustomLayout>
   );

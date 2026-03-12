@@ -52,18 +52,6 @@ const styles = `
 .legacy-edge-right { animation: legacy-flow-right 1.2s linear infinite; }
 .legacy-edge-down { animation: legacy-flow-down 1s linear infinite; }
 
-/* Red X overlay for "problems" */
-.legacy-problem {
-  position: relative;
-}
-.legacy-problem::after {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border: 2px solid #ef4444;
-  border-radius: 10px;
-  pointer-events: none;
-}
 `;
 
 export default function LegacyArchitectureDiagram() {
@@ -106,7 +94,7 @@ export default function LegacyArchitectureDiagram() {
           </div>
 
           {/* Main layout */}
-          <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '200px 40px 1fr', gap: 0, alignItems: 'center' }}>
 
             {/* LEFT: Python */}
             <div className="legacy-section" style={{ borderColor: '#a78bfa', display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -142,19 +130,31 @@ export default function LegacyArchitectureDiagram() {
               <div style={{ fontSize: 9, color: '#8b949e', textAlign: 'center' }}>...x64 environments</div>
             </div>
 
+            {/* CENTER: Connecting arrows */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
+              {[0, 1, 2, 3].map(i => (
+                <svg key={i} width="40" height="20">
+                  <line x1="2" y1="10" x2="30" y2="10" stroke={processBorders[i]} strokeWidth="1.5"
+                    strokeDasharray="5 3" className="legacy-edge-right" />
+                  <path d={`M27,5 L35,10 L27,15`} fill="none" stroke={processBorders[i]} strokeWidth="1.5" />
+                </svg>
+              ))}
+              <div style={{ fontSize: 8, color: '#8b949e' }}>1:1 gRPC</div>
+            </div>
+
             {/* RIGHT: 64 .NET Processes */}
             <div className="legacy-section" style={{ borderColor: '#4ade80' }}>
               <div className="legacy-section-label" style={{ color: '#4ade80' }}>64 Separate .NET Processes</div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginTop: 4 }}>
                 {[1, 2, 3, 4].map((id, idx) => (
                   <div key={id} className="legacy-section" style={{
-                    borderColor: processBorders[idx], padding: 10,
+                    borderColor: processBorders[idx], padding: '14px 8px 8px',
                   }}>
                     <div className="legacy-section-label" style={{ color: processBorders[idx], fontSize: 9 }}>
                       Process {id}
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginTop: 4 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                       <div style={{
                         background: processColors[idx], border: `1.5px solid ${processBorders[idx]}`,
                         borderRadius: 5, padding: '4px 6px', fontSize: 9, color: '#fff',

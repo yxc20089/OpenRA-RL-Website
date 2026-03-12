@@ -221,42 +221,26 @@ export default function GameStateDiagram() {
               <Node color="green" title="LOADING" subtitle="map, rules, traits, gRPC server" style={{ width: '80%' }} />
               <ArrowDown color="#4ade80" label="start gRPC server" />
 
-              {/* CONNECTING — with error branch */}
-              <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flex: '0 0 40px' }}>
-                  <ArrowLeft color="#ea580c" label="fail connect" width={50} />
-                </div>
-                <Node color="teal" title="CONNECTING" subtitle="BridgeClient retries GetState() RPC" style={{ flex: 1 }} />
-                <div style={{ flex: '0 0 40px' }} />
-              </div>
+              {/* CONNECTING */}
+              <Node color="teal" title="CONNECTING" subtitle="BridgeClient retries GetState() RPC" style={{ width: '80%' }} />
               <ArrowDown color="#2dd4bf" label="establish session" />
 
-              {/* STREAMING — with error branch */}
-              <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flex: '0 0 40px' }}>
-                  <ArrowLeft color="#ea580c" label="" width={50} />
-                </div>
-                <Node color="teal" title="STREAMING" subtitle="GameSession RPC, bg obs reader" style={{ flex: 1 }} />
-                <div style={{ flex: '0 0 40px' }} />
-              </div>
+              {/* STREAMING */}
+              <Node color="teal" title="STREAMING" subtitle="GameSession RPC, bg obs reader" style={{ width: '80%' }} />
               <ArrowDown color="#2dd4bf" label="receive first obs" />
 
               {/* PLAYING — highlighted, with self-loop */}
-              <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                {/* Error branch from PLAYING */}
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flex: '0 0 40px' }}>
-                  <ArrowLeft color="#ea580c" label="lose stream" width={50} />
-                </div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '80%' }}>
                 <Node color="green" title="PLAYING" subtitle='step() loop, recording .orarep' highlight style={{ flex: 1 }} />
                 {/* Self-loop on right */}
-                <div style={{ flex: '0 0 56px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  <svg width="56" height="64" viewBox="0 0 56 64">
+                <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: 4 }}>
+                  <svg width="48" height="56" viewBox="0 0 48 56">
                     <defs>
                       <marker id="gs-ar-loop" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
                         <path d="M0,0 L8,3 L0,6" fill="#4ade80" />
                       </marker>
                     </defs>
-                    <path d="M4,24 Q52,24 52,32 Q52,40 4,40" fill="none" stroke="#4ade80" strokeWidth="1.5"
+                    <path d="M4,20 Q44,20 44,28 Q44,36 4,36" fill="none" stroke="#4ade80" strokeWidth="1.5"
                       strokeDasharray="4 3" className="gs-edge-right" markerEnd="url(#gs-ar-loop)" />
                   </svg>
                   <EdgeLabel text="step()" color="#4ade80" />
@@ -264,35 +248,24 @@ export default function GameStateDiagram() {
               </div>
               <ArrowDown color="#4ade80" label="detect game end" />
 
-              {/* GAME OVER — with orarep branch right */}
-              <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                <div style={{ flex: '0 0 40px' }} />
-                <Node color="green" title="GAME OVER" subtitle="done=True, result: win / lose / draw" style={{ flex: 1 }} />
-                <div style={{ flex: '0 0 56px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  <ArrowRight color="#4ade80" label="orarep saved" width={56} />
-                </div>
-              </div>
+              {/* GAME OVER */}
+              <Node color="green" title="GAME OVER" subtitle="done=True, result: win / lose / draw" style={{ width: '80%' }} />
               <ArrowDown color="#4ade80" label="close streams" />
 
               {/* CLEANUP */}
               <Node color="teal" title="CLEANUP" subtitle="close bridge, kill process" style={{ width: '80%' }} />
 
-              {/* Loop-back arrow: CLEANUP -> IDLE */}
-              <div style={{ position: 'relative', width: '100%', height: 40 }}>
-                <svg style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: 40, overflow: 'visible' }}>
-                  <defs>
-                    <marker id="gs-ar-loopback" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto-start-reverse">
-                      <path d="M0,0 L8,3 L0,6" fill="#a78bfa" />
-                    </marker>
-                  </defs>
-                  {/* Go left, up, then arrive at top-left of IDLE */}
-                  <path d="M 50%,4 L 8%,4 L 8%,-780 L 40%,-780" fill="none"
-                    stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="8 5"
-                    className="gs-edge-up" markerEnd="url(#gs-ar-loopback)" />
+              {/* Loop-back indicator */}
+              <div style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                marginTop: 4, padding: '6px 12px',
+                border: '1.5px dashed #a78bfa', borderRadius: 6, width: '80%',
+              }}>
+                <svg width="20" height="16">
+                  <path d="M16,12 Q4,12 4,8 Q4,4 16,4" fill="none" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="3 2" />
+                  <path d="M13,1 L17,4 L13,7" fill="none" stroke="#a78bfa" strokeWidth="1.5" />
                 </svg>
-                <div style={{ position: 'absolute', left: 0, top: 14, transform: 'rotate(-90deg) translateX(-100%)', transformOrigin: '0 0' }}>
-                  <EdgeLabel text="episode loop-back" color="#a78bfa" />
-                </div>
+                <EdgeLabel text="loop back to IDLE (next episode)" color="#a78bfa" />
               </div>
             </div>
 

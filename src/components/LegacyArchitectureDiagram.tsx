@@ -194,23 +194,6 @@ export default function LegacyArchitectureDiagram() {
                 ...x64 identical processes, each with its own ModData, JIT, gRPC server
               </div>
 
-              {/* Animated arrows between Python envs and processes */}
-              <div style={{ display: 'flex', justifyContent: 'center', gap: 20, marginTop: 12 }}>
-                {[0, 1, 2, 3].map(i => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                    <svg width="60" height="16">
-                      <defs>
-                        <marker id={`la-${i}`} markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-                          <path d="M0,0 L8,3 L0,6" fill={processBorders[i]} />
-                        </marker>
-                      </defs>
-                      <line x1="4" y1="8" x2="48" y2="8" stroke={processBorders[i]} strokeWidth="1.5"
-                        markerEnd={`url(#la-${i})`} strokeDasharray="5 3" className="legacy-edge-right" />
-                    </svg>
-                    <span style={{ fontSize: 8, color: processBorders[i] }}>1:1</span>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
 

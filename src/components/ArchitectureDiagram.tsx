@@ -237,14 +237,10 @@ export default function ArchitectureDiagram() {
 
               {/* Arrow down */}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <svg width="20" height="20">
-                  <defs>
-                    <marker id="ms-ad" markerWidth="6" markerHeight="8" refX="3" refY="8" orient="auto">
-                      <path d="M0,0 L3,8 L6,0" fill="#4ade80" />
-                    </marker>
-                  </defs>
-                  <line x1="10" y1="2" x2="10" y2="14" stroke="#4ade80" strokeWidth="1.5" markerEnd="url(#ms-ad)"
+                <svg width="12" height="24">
+                  <line x1="6" y1="2" x2="6" y2="18" stroke="#4ade80" strokeWidth="1.5"
                     strokeDasharray="4 3" className="edge-down" />
+                  <path d="M2,16 L6,22 L10,16" fill="none" stroke="#4ade80" strokeWidth="1.5" />
                 </svg>
               </div>
 
@@ -252,9 +248,10 @@ export default function ArchitectureDiagram() {
 
               {/* Arrow down */}
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8 }}>
-                <svg width="20" height="24">
-                  <line x1="10" y1="2" x2="10" y2="18" stroke="#60a5fa" strokeWidth="1.5" markerEnd="url(#ms-ad)"
+                <svg width="12" height="24">
+                  <line x1="6" y1="2" x2="6" y2="18" stroke="#60a5fa" strokeWidth="1.5"
                     strokeDasharray="4 3" className="edge-down" />
+                  <path d="M2,16 L6,22 L10,16" fill="none" stroke="#60a5fa" strokeWidth="1.5" />
                 </svg>
                 <EdgeLabel text="submit WorkItem" color="#60a5fa" />
               </div>
@@ -281,9 +278,10 @@ export default function ArchitectureDiagram() {
 
               {/* Arrow down */}
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8 }}>
-                <svg width="20" height="24">
-                  <line x1="10" y1="2" x2="10" y2="18" stroke="#f87171" strokeWidth="1.5" markerEnd="url(#ms-ad)"
+                <svg width="12" height="24">
+                  <line x1="6" y1="2" x2="6" y2="18" stroke="#f87171" strokeWidth="1.5"
                     strokeDasharray="4 3" className="edge-down" />
+                  <path d="M2,16 L6,22 L10,16" fill="none" stroke="#f87171" strokeWidth="1.5" />
                 </svg>
                 <EdgeLabel text="tick game forward" color="#f87171" />
               </div>

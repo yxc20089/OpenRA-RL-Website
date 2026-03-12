@@ -315,40 +315,64 @@ export default function ArchitectureDiagram() {
 
           {/* Request Flow */}
           <div style={{
-            marginTop: 24, padding: '16px 20px',
+            marginTop: 24, padding: '20px 24px',
             background: '#161b22', border: '1px solid #21262d', borderRadius: 8,
           }}>
-            <div style={{ fontSize: 13, fontWeight: 700, color: '#fff', marginBottom: 12, letterSpacing: 0.5 }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 16, letterSpacing: 0.5 }}>
               Request Flow
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8, textAlign: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'stretch', gap: 0 }}>
               {[
-                { step: '1', text: 'FastAdvance(session_id)', color: '#a78bfa', bg: '#7c3aed' },
-                { step: '2', text: 'Lookup session in registry', color: '#60a5fa', bg: '#2563eb' },
-                { step: '3', text: 'Submit WorkItem to queue', color: '#f87171', bg: '#dc2626' },
-                { step: '4', text: 'Worker ticks game forward', color: '#4ade80', bg: '#16a34a' },
-                { step: '5', text: 'Return observation', color: '#2dd4bf', bg: '#0d9488' },
-              ].map(({ step, text, color, bg }, i) => (
-                <div key={step} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                { step: '1', title: 'FastAdvance', sub: 'gRPC call with session_id', color: '#a78bfa', bg: '#7c3aed', layer: 'Python client' },
+                { step: '2', title: 'Route by session_id', sub: 'ConcurrentDictionary lookup', color: '#60a5fa', bg: '#2563eb', layer: 'Kestrel gRPC' },
+                { step: '3', title: 'Submit WorkItem', sub: 'BlockingCollection.TryAdd', color: '#f87171', bg: '#dc2626', layer: 'Worker pool' },
+                { step: '4', title: 'Tick game forward', sub: 'World.Tick() in loop until target', color: '#4ade80', bg: '#16a34a', layer: 'Worker thread' },
+                { step: '5', title: 'Return observation', sub: 'TCS completes, obs serialized', color: '#2dd4bf', bg: '#0d9488', layer: 'gRPC response' },
+              ].map(({ step, title, sub, color, bg, layer }, i) => (
+                <React.Fragment key={step}>
+                  <div style={{
+                    flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
+                  }}>
+                    {/* Step number */}
                     <div style={{
-                      width: 26, height: 26, borderRadius: '50%',
+                      width: 30, height: 30, borderRadius: '50%',
                       background: bg, border: `2px solid ${color}`,
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: 13, fontWeight: 700, color: '#fff', flexShrink: 0,
+                      fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 8,
                     }}>
                       {step}
                     </div>
-                    {i < 4 && (
-                      <svg width="24" height="12" style={{ flexShrink: 0 }}>
-                        <line x1="2" y1="6" x2="18" y2="6" stroke={color} strokeWidth="1.5"
-                          strokeDasharray="4 3" className="edge-right" />
-                        <path d="M15,2 L21,6 L15,10" fill="none" stroke={color} strokeWidth="1.5" />
-                      </svg>
-                    )}
+                    {/* Card */}
+                    <div style={{
+                      background: `${bg}22`, border: `1.5px solid ${color}50`,
+                      borderRadius: 8, padding: '10px 8px', width: '100%',
+                    }}>
+                      <div style={{ fontSize: 12, fontWeight: 700, color, lineHeight: 1.3 }}>{title}</div>
+                      <div style={{ fontSize: 10, color: '#8b949e', marginTop: 4, lineHeight: 1.3 }}>{sub}</div>
+                    </div>
+                    {/* Layer tag */}
+                    <div style={{
+                      fontSize: 9, color: '#484f58', marginTop: 6,
+                      border: '1px solid #21262d', borderRadius: 4, padding: '2px 6px',
+                    }}>
+                      {layer}
+                    </div>
                   </div>
-                  <span style={{ fontSize: 10, color: '#8b949e', lineHeight: 1.3 }}>{text}</span>
-                </div>
+                  {/* Arrow between steps */}
+                  {i < 4 && (
+                    <div style={{ display: 'flex', alignItems: 'center', padding: '0 2px', paddingBottom: 30 }}>
+                      <svg width="36" height="16">
+                        <defs>
+                          <marker id={`rf-${i}`} markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto">
+                            <path d="M0,0 L6,2.5 L0,5" fill={color} />
+                          </marker>
+                        </defs>
+                        <line x1="2" y1="8" x2="28" y2="8" stroke={color} strokeWidth="2"
+                          markerEnd={`url(#rf-${i})`} strokeDasharray="5 3" className="edge-right" />
+                      </svg>
+                    </div>
+                  )}
+                </React.Fragment>
               ))}
             </div>
           </div>

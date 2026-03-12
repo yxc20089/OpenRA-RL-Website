@@ -6,6 +6,7 @@ title: Architecture
 import ArchitectureDiagram from '@site/src/components/ArchitectureDiagram';
 import SystemArchitectureDiagram from '@site/src/components/SystemArchitectureDiagram';
 import GameStateDiagram from '@site/src/components/GameStateDiagram';
+import AsyncEventQueueDiagram from '@site/src/components/AsyncEventQueueDiagram';
 
 # Architecture
 
@@ -68,6 +69,51 @@ The canonical schema lives at `proto/rl_bridge.proto` and defines:
 - **`GameState`** — High-level game phase query
 
 The proto is compiled to both Python (gRPC stubs) and C# (pre-generated for Docker/CI compatibility).
+
+## Async Event Queue
+
+The game engine and the agent run at fundamentally different speeds — the game ticks at ~25 Hz while an LLM agent might take 2+ seconds per decision. The async event queue design solves this mismatch using .NET's `System.Threading.Channels` with bounded, non-blocking semantics.
+
+<AsyncEventQueueDiagram />
+
+### Channel Design
+
+Each session maintains two bounded channels:
+
+| Channel | Type | Capacity | Policy | Writer | Reader |
+|---------|------|----------|--------|--------|--------|
+| **Observation** | `BoundedChannel<GameObservation>` | 1 | DropOldest | Game thread | gRPC stream |
+| **Action** | `BoundedChannel<AgentAction>` | 16 | DropOldest | gRPC stream | Game thread |
+
+```csharp
+// Observation channel: capacity=1, latest overwrites stale
+readonly Channel<GameObservation> observationChannel =
+    Channel.CreateBounded<GameObservation>(
+        new BoundedChannelOptions(1)
+        {
+            FullMode = BoundedChannelFullMode.DropOldest,
+            SingleWriter = true,
+            SingleReader = true,
+        });
+```
+
+### Why This Works
+
+1. **Game never blocks**: `observationChannel.Writer.TryWrite(obs)` is non-blocking. If the channel is full (agent hasn't read yet), the old observation is silently replaced.
+2. **Agent always sees latest state**: With capacity=1 and DropOldest, the single slot always contains the most recent tick's observation. An agent waking up after 2 seconds of thinking reads tick 150, not a queue of ticks 100-150.
+3. **Actions are batched**: The game drains *all* pending actions each tick with `TryRead()` in a loop. Multiple commands sent between ticks are all executed together.
+4. **No-op on empty**: If no actions are pending, the game continues with default behavior — no stall, no error.
+
+### gRPC Stream Tasks
+
+The `RLBridgeService.GameSession` RPC spawns two concurrent async tasks that bridge the channels to the gRPC stream:
+
+```
+ObsSender task:    channel.Reader.ReadAsync() → stream.WriteAsync()
+ActionReceiver:    stream.MoveNext() → channel.Writer.WriteAsync()
+```
+
+Both tasks exit when either the game ends or the agent disconnects, triggering cleanup via `CancellationToken`.
 
 ## Multi-Session Architecture
 

@@ -178,32 +178,24 @@ export default function ArchitectureDiagram() {
               </svg>
 
               <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
-                {/* FastAdvance arrow → */}
+                {/* Request arrow → */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <svg width="80" height="20">
-                    <defs>
-                      <marker id="ms-ar" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-                        <path d="M0,0 L8,3 L0,6" fill="#fb923c" />
-                      </marker>
-                    </defs>
-                    <line x1="4" y1="10" x2="66" y2="10" stroke="#fb923c" strokeWidth="2" markerEnd="url(#ms-ar)"
+                    <line x1="4" y1="10" x2="66" y2="10" stroke="#fb923c" strokeWidth="2"
                       strokeDasharray="6 4" className="edge-right" />
+                    <path d="M63,5 L71,10 L63,15" fill="none" stroke="#fb923c" strokeWidth="2" />
                   </svg>
-                  <EdgeLabel text="FastAdvance" color="#fb923c" />
+                  <EdgeLabel text="Request (invoke)" color="#fb923c" />
                 </div>
 
-                {/* Observation arrow ← */}
+                {/* Response arrow ← */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <svg width="80" height="20">
-                    <defs>
-                      <marker id="ms-al" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
-                        <path d="M8,0 L0,3 L8,6" fill="#2dd4bf" />
-                      </marker>
-                    </defs>
-                    <line x1="14" y1="10" x2="76" y2="10" stroke="#2dd4bf" strokeWidth="2" markerEnd="url(#ms-al)"
+                    <line x1="14" y1="10" x2="76" y2="10" stroke="#2dd4bf" strokeWidth="2"
                       strokeDasharray="6 4" className="edge-left" />
+                    <path d="M17,5 L9,10 L17,15" fill="none" stroke="#2dd4bf" strokeWidth="2" />
                   </svg>
-                  <EdgeLabel text="Observation" color="#2dd4bf" />
+                  <EdgeLabel text="Response (result)" color="#2dd4bf" />
                 </div>
 
                 {/* RPC box */}

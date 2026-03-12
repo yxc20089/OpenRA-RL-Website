@@ -4,12 +4,14 @@ title: Architecture
 ---
 
 import ArchitectureDiagram from '@site/src/components/ArchitectureDiagram';
+import SystemArchitectureDiagram from '@site/src/components/SystemArchitectureDiagram';
+import GameStateDiagram from '@site/src/components/GameStateDiagram';
 
 # Architecture
 
 OpenRA-RL connects three components through a gRPC bridge:
 
-![Architecture Diagram](/img/architecture_diagram.png)
+<SystemArchitectureDiagram />
 
 ## Three-Repo Design
 
@@ -77,7 +79,7 @@ This design replaced the original one-process-per-environment approach, cutting 
 
 ## Game Lifecycle
 
-![Game State Diagram](/img/game_state_diagram.png)
+<GameStateDiagram />
 
 1. **Reset**: Environment starts a new game map, waits for the game to initialize
 2. **Planning Phase** (optional): Agent studies the map and opponent before acting

@@ -67,7 +67,9 @@ proto 文件同时编译为 Python（gRPC stubs）和 C#（为 Docker/CI 兼容�
 
 ## 游戏生命周期
 
-![游戏状态图](/img/game_state_diagram.png)
+import GameStateDiagram from '@site/src/components/GameStateDiagram';
+
+<GameStateDiagram />
 
 1. **重置**：环境启动新地图，等待游戏初始化完成
 2. **规划阶段**（可选）：智能体在采取行动前研究地图和对手情报

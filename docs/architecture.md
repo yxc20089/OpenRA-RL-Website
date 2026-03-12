@@ -3,6 +3,8 @@ sidebar_position: 2
 title: Architecture
 ---
 
+import ArchitectureDiagram from '@site/src/components/ArchitectureDiagram';
+
 # Architecture
 
 OpenRA-RL connects three components through a gRPC bridge:
@@ -64,6 +66,14 @@ The canonical schema lives at `proto/rl_bridge.proto` and defines:
 - **`GameState`** — High-level game phase query
 
 The proto is compiled to both Python (gRPC stubs) and C# (pre-generated for Docker/CI compatibility).
+
+## Multi-Session Architecture
+
+The training setup runs 64 game sessions inside a single .NET process, sharing JIT-compiled code and mod data. A gRPC server routes requests by `session_id` to a thread pool that ticks each game forward independently.
+
+<ArchitectureDiagram />
+
+This design replaced the original one-process-per-environment approach, cutting reset time from 5-15 seconds down to 256ms and reducing memory from ~40 GB to ~5-7 GB for 64 concurrent sessions.
 
 ## Game Lifecycle
 
